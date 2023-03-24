@@ -21,28 +21,31 @@ export class NeighbourhoodsByForceComponent implements OnInit {
   totalItems: number = 0;
   pageSize = 5;
 
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
-  
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
   constructor(private policeApiService: PoliceApiService,
-              private route: ActivatedRoute) { }
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      this.policeApiService.getNeighbourhoodsByForce(this.id).subscribe((res: any) => {
-        this.dataSource.data = res;
-        this.totalItems = res.length;
+      this.policeApiService.getNeighbourhoodsByForce(this.id);
+      this.policeApiService.policeApiData$.subscribe(data => {
+        if (data.neighbourhoods) {
+          this.dataSource.data = data.neighbourhoods;
+          this.totalItems = data.neighbourhoods.length;
+        }
       });
     });
   }
 
-  
+
   onFilterList(filterValue: string) {
     filterValue = filterValue.toLowerCase();
     this.dataSource.filter = filterValue;

@@ -36,9 +36,12 @@ export class SeniorOfficerListComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.id = params['id'];
-      this.policeApiService.getPoliceForceSeniorOfficerDetails(this.id).subscribe((res: any) => {
-        this.dataSource.data = res;
-        this.totalItems = res.length;
+      this.policeApiService.getPoliceForceSeniorOfficerDetails(this.id);
+      this.policeApiService.policeApiData$.subscribe(data => {
+        if (data.seniorOfficerDetails) {
+          this.dataSource.data = data.seniorOfficerDetails;
+          this.totalItems = data.seniorOfficerDetails.length;
+        }
       });
     });
   }

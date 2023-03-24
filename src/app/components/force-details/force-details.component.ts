@@ -12,18 +12,21 @@ import { PoliceApiService } from 'src/app/services/police-api.service';
 export class ForceDetailsComponent implements OnInit {
   forceDetail: PoliceForceDetail;
   sanitizedDescription: any;
-  forceId: string;
+  id: string;
   
   constructor(private route: ActivatedRoute,
               private sanitizer: DomSanitizer,
               private policeApiService: PoliceApiService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      this.forceId = params.get('id');
-      this.policeApiService.getPoliceForceDetails(this.forceId).subscribe((force: any) => {
-        this.forceDetail = force;
-        this.sanitizedDescription = this.sanitizer.bypassSecurityTrustHtml(this.forceDetail.description);
+    this.route.params.subscribe(params => {
+      this.id = params['id'];
+      this.policeApiService.getPoliceForceDetails(this.id);
+      this.policeApiService.policeApiData$.subscribe(data => {
+        if (data.forceDetails) {
+          this.forceDetail = data.forceDetails;
+          this.sanitizedDescription = this.sanitizer.bypassSecurityTrustHtml(this.forceDetail.description);
+        }
       });
     });
   }

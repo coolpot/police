@@ -14,17 +14,16 @@ export class SidebarComponent implements OnInit {
   constructor(private policeApiService: PoliceApiService) {}
 
   ngOnInit(): void {
-    this.policeApiService.getPoliceForcesList().subscribe((res: any) => {
-      this.forcesList = res;
+    this.policeApiService.getPoliceForcesList();
+    this.policeApiService.policeApiData$.subscribe(data => {
+      this.forcesList = data.forcesList;
       this.filteredForcesList = this.forcesList;
     });
   }
-
 
   onFilterList(filterValue: string) {
     this.filteredForcesList = this.forcesList.filter(force =>
       force.name.toLowerCase().includes(filterValue.toLowerCase())
     );
   }
-
 }
