@@ -1,0 +1,25 @@
+<div class="container">
+    <h1>{{forceDetail?.name | titlecase}}</h1>
+    <br />
+    <div *ngIf="forceDetail?.description !== null">
+        <h2>Description</h2>
+        <p [innerHTML]="sanitizedDescription"></p>
+
+    </div>
+    <div *ngFor="let method of forceDetail?.engagement_methods">
+        <a [href]="method.url" target="_blank">{{ method.title }}</a>
+    </div>
+    <br />
+    <h2 *ngIf="forceDetail?.telephone">Telephone: {{forceDetail?.telephone}}</h2>
+    <h2 *ngIf="forceDetail?.url">Web: <a [href]="forceDetail?.url" target="_blank">Visit Us</a></h2>
+
+    <div>
+        <div>
+            <app-senior-officer-list></app-senior-officer-list>
+        </div>
+        <br />
+        <div>
+            <app-neighbourhoods-by-force></app-neighbourhoods-by-force>
+        </div>
+    </div>
+</div>

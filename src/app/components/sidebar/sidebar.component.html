@@ -1,0 +1,16 @@
+<mat-toolbar color="primary">
+    <mat-icon>search</mat-icon>
+    <span>Fuzz Finder</span>
+    <span class="example-spacer"></span>
+</mat-toolbar>
+<div class="container">
+    <div class="searchInput">
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Filter Forces List" (keyup)="onFilterList($event.target.value)">
+        </mat-form-field>  
+    </div>
+    <div class="forcesList">
+        <a *ngFor="let force of filteredForcesList" class="force-link" [routerLink]="['/force', force.id]" >{{force.name}}</a>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+.sidebar {
+    height: 100%;
+    width: 20%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    background-color: #f1f1f1;
+    overflow: auto;
+}
+
+.container {
+    margin-left: 20%;
+    padding: 1.5rem;
+}

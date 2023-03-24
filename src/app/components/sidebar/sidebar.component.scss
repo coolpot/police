@@ -1,0 +1,19 @@
+.container {
+    padding: 5px;
+}
+
+.force-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+  
+  .force-link:hover,
+  .force-link:active,
+  .force-link:focus {
+    text-decoration: none;
+    color: inherit;
+  }

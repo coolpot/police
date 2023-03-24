@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Neighbourhoods</h2>
+    <div class="searchInput">
+        <mat-form-field>
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Filter Neighbourhoods List" (keyup)="onFilterList($event.target.value)">
+        </mat-form-field>
+    </div>
+    <div class="mat-elevation-z8">
+        <table mat-table matSort [dataSource]="dataSource" #sort>
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator #paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 20]"
+            showFirstLastButtons>
+        </mat-paginator>
+    </div>
+</div>
